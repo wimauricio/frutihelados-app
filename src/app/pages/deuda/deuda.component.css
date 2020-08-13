@@ -1,0 +1,15 @@
+.containerWidth{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.example-spacer{
+    margin-left: 1%;
+}
+
+.texto{
+    font-family: cursive;
+    font-size: 400%;
+    color: green;
+}

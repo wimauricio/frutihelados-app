@@ -1,0 +1,46 @@
+<div class="containerWidth">
+    <mat-toolbar>Gestión Deuda</mat-toolbar>
+    <br>
+        
+        <mat-list role="list" *ngFor="let v of ventasDeuda; let i=index" > 
+
+
+            <mat-form-field>
+                <input matInput  placeholder="Nombre" [(ngModel)]="v.deudor.nombres" readonly>
+            </mat-form-field>
+            <span class="example-spacer"></span>
+            <mat-form-field>
+                <input matInput  placeholder="Nombre" [(ngModel)]="v.deudor.apellidos" readonly>
+            </mat-form-field>
+            <span class="example-spacer"></span>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Cantidad Vasos Comprados" [(ngModel)]="v.cantidadVasosVendidos" readonly>
+            </mat-form-field>
+            <span class="example-spacer"></span>
+            <mat-form-field>
+                <input matInput  placeholder="Fecha Venta" [(ngModel)]="v.fecha" readonly>
+            </mat-form-field>
+            <span class="example-spacer"></span>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Cantidad Vasos Deuda" [(ngModel)]="v.deudor.cantidadVasosDeuda">
+            </mat-form-field>
+
+            <span class="example-spacer"></span>
+            <mat-form-field>
+                <input matInput type="text" placeholder="$ Total Deuda" value="{{total(v.deudor.cantidadVasosDeuda, v.heladoDisponible.valorVasoUnidad)}}">
+            </mat-form-field>
+           
+            
+                
+           
+            <span class="example-spacer"></span>
+        
+        
+            <span class="example-spacer"></span>
+            <button mat-fab color="primary" [disabled]= "mostrarMensaje(v.deudor.cantidadVasosDeuda, v.cantidadVasosVendidos)" (click) = "actualizarVenta(v)">
+                <mat-icon>update</mat-icon>
+            </button>
+            <br>
+            <h4 style="color: red;" [hidden]="!mostrarMensaje(v.deudor.cantidadVasosDeuda, v.cantidadVasosVendidos)"> La cantidad de vasos deuda no puede ser mayor a la cantidad de vasos vendidos</h4>
+        </mat-list>
+</div>

@@ -1,0 +1,24 @@
+.containerWidth{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.example-card {
+    width: 23%;
+    margin-bottom: 2%;
+  }
+  
+.example-header-image {
+    background-size: cover;
+}
+
+.example-spacer{
+    margin-left: 1%;
+}
+
+.texto{
+    font-family: cursive;
+    font-size: 400%;
+    color: green;
+}

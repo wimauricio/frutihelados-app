@@ -1,0 +1,114 @@
+<div class="containerWidth">
+    <div>
+        <div class="colorGren" fxFlex="5%"></div> Venta Completa
+        <span class="example-spacer-7"></span>
+        <div class="colorRed" fxFlex="5%"></div> Por Vender
+    </div>
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+        <mat-selection-list #inversion [multiple]="false" >
+            <mat-list-option *ngFor="let d of reporteDto" (click)="cargarDetalle(d.idInversion)">
+                <div fxLayout="row"  fxLayoutWrap fxLayoutGap="0.5%" fxLayout.xs="column">
+                    <div  fxFlex="50%" [ngStyle] = "{'color' : d.vasosDispoInversion === 0 ? 'green' : 'red'}">
+                        Total Inversión
+                        <span class="example-spacer"></span>
+                        {{fortmat(d.totalInversion)}}
+                    </div>
+                    <div  fxFlex="50%">
+                        Fecha 
+                        <span class="example-spacer"></span>
+                        {{fechaFormat(d.fechaInversion)}} 
+                    </div>
+                </div>
+            </mat-list-option>
+        </mat-selection-list>
+    </cdk-virtual-scroll-viewport>
+
+    <div class="example-header">
+        <mat-form-field>
+            <input matInput placeholder="Buscar " (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="sabor" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Sabor Helado</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <span class="mobile-label">Sabor Helado:</span>
+                {{row.sabor}} 
+            </mat-cell>
+
+            <mat-footer-cell *matFooterCellDef> TOTAL </mat-footer-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="cantVDis">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cant. Vasos Disponibles</mat-header-cell>
+            <mat-cell  *matCellDef="let row"> 
+                <span class="mobile-label">Cant. Vasos Disponibles:</span>
+                {{row.cantidadVasosDisponibles}} 
+            </mat-cell>
+
+            <mat-footer-cell *matFooterCellDef> {{totalVsDisp}}  </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cantVV">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cant. Vasos Vendidos</mat-header-cell>
+            <mat-cell  *matCellDef="let row"> 
+                <span class="mobile-label">Cant. Vasos Vendidos:</span>
+                {{row.cantidadVasosVendidos}} 
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{totalVsVendido}} </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="valUn">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Valor V. Unidad</mat-header-cell>
+            <mat-cell  *matCellDef="let row">
+                <span class="mobile-label">Valor V. Unidad:</span>
+                 {{fortmat(row.valorVasoUnidad)}} 
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef>  </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ttlcaja">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total en Caja</mat-header-cell>
+            <mat-cell  *matCellDef="let row">
+                <span class="mobile-label">Total en Caja:</span>
+                {{fortmat(row.totalEnCaja)}} 
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{fortmat(totalCaja)}} </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ctdeuda">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cant. Vasos en Deuda</mat-header-cell>
+            <mat-cell  *matCellDef="let row">
+                <span class="mobile-label">Cant. Vasos en Deuda:</span>
+                {{row.cantidadVasosVendidosEnDeuda}}
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{totalVsDeuda}} </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ttdeuda">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total Deuda</mat-header-cell>
+            <mat-cell  *matCellDef="let row"> 
+                <span class="mobile-label">Total Deuda:</span>
+                {{fortmat(row.totalVasosVendidosDeuda)}}
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{fortmat(totalDeuda)}}  </mat-footer-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="ttesperado">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total Esperado</mat-header-cell>
+            <mat-cell  *matCellDef="let row"> 
+                <span class="mobile-label">Total Esperado:</span>
+                {{fortmat(row.totalDineroEsperado)}}
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{fortmat(totalEsperado)}} </mat-footer-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="displayColumns; sticky: true" class="example-first-footer-row"></mat-footer-row>
+        
+    </mat-table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+
+</div>

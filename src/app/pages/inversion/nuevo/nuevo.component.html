@@ -1,0 +1,119 @@
+
+<mat-card class="containerWidth" >
+    
+    
+    <mat-card-title>Ingredientes </mat-card-title>
+    <mat-card-subtitle> {{fechaFormat}} </mat-card-subtitle>
+    <mat-form-field>
+        <mat-select placeholder="Ingrediente" [(value)]="ingredienteInversion.ingrediente" required>
+            <mat-option *ngFor ="let i of ingredientes" [value]="i">{{i.descripcion}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cantidad" [(ngModel)]="ingredienteInversion.cantidad" required>
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <span matPrefix>$ &nbsp;</span>
+        <input matInput type="number" placeholder="Valor Total" [(ngModel)]="ingredienteInversion.valorTotal" required>
+    </mat-form-field>
+
+    <span class="example-spacer"></span>
+    <br>
+
+    <button mat-raised-button color="accent" (click)="adicionar()" [disabled]= "estadoBotonAdicionar()">
+        <mat-icon>done</mat-icon>
+        <span>Adicionar</span>
+    </button>
+
+
+
+    <mat-list role="list" *ngFor="let d of listIngredienteInversion; let i=index">
+       
+        <mat-form-field>
+            <input matInput  placeholder="Ingrediente" [(ngModel)]="d.ingrediente.descripcion" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <input matInput type="number" placeholder="Cantidad" [(ngModel)]="d.cantidad" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <span matPrefix>$ &nbsp;</span>
+            <input matInput type="number" placeholder="Valor Total" [(ngModel)]="d.valorTotal" readonly>
+        </mat-form-field>
+    
+        <span class="example-spacer"></span>
+        <button mat-raised-button color="warn" (click)="eliminarIngrediente(d)">Remover</button>
+    </mat-list>
+
+
+</mat-card>
+
+<mat-card class="containerWidth">
+    <mat-card-title>Helados Disponibles para la Venta </mat-card-title>
+    <mat-card-subtitle> {{fechaFormat}} </mat-card-subtitle>
+    <mat-form-field>
+        <mat-select placeholder="Sabor" [(value)]="heladoDisponible.sabor" required>
+            <mat-option *ngFor ="let s of sabores" [value]="s">{{s.descripcion}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <span class="example-spacer"></span>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cant. Vasos Preparados" [(ngModel)]="heladoDisponible.cantidadVasosPreparados" required>
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <input matInput  type="number" placeholder="Cant. Vasos Disponibles" [(ngModel)]="heladoDisponible.cantidadVasosDispobibles" required>
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <span matPrefix>$ &nbsp;</span>
+        <input matInput type="number" placeholder="Valor Vaso Unidad" [(ngModel)]="heladoDisponible.valorVasoUnidad" required>
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="accent" (click)="adicionarHelado()" [disabled]= "estadoBotonAdicionarHelado()">
+        <mat-icon>done</mat-icon>
+        <span>Adicionar</span>
+    </button>
+
+    <mat-list role="list" *ngFor="let d of listHeladosDisponibles; let i=index">
+        <mat-form-field>
+            <input matInput  placeholder="Sabor" [(ngModel)]="d.sabor.descripcion" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+    
+        <mat-form-field>
+            <input matInput type="number" placeholder="Cantidad Vasos Preparados" [(ngModel)]="d.cantidadVasosPreparados" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <input matInput  type="number" placeholder="Cantidad Vasos Disponibles" [(ngModel)]="d.cantidadVasosDispobibles" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <span matPrefix>$ &nbsp;</span>
+            <input matInput type="number" placeholder="Valor Vaso Unidad" [(ngModel)]="d.valorVasoUnidad" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <button mat-raised-button color="warn" (click)="eliminarHelado(d)">Remover</button>
+    </mat-list> 
+   
+    
+</mat-card>
+<br>
+<br>
+<div class="containerWidth">
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" style="float: right;" (click)="guardar()" [disabled]= "estadoBotonGuardar()">Guardar Inversión</button>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="accent" style="float: right;" [routerLink]="['/inversion']" routerLinkActive="router-link-active" >Cancelar</button>
+</div>

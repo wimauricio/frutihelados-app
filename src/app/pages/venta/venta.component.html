@@ -1,0 +1,48 @@
+<div class="containerWidth" fxLayout="row"  fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"> 
+        <mat-card *ngFor="let hd of heladosDisponibles" class="example-card">
+            <mat-card-header>
+                <mat-card-title> {{hd.cantidadVasosDispobibles}}</mat-card-title>
+                <mat-card-subtitle> {{hd.sabor.descripcion}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src= "{{hd.sabor.rutaImagen}}" >
+
+            <mat-card-actions > 
+                <button mat-fab color="primary" (click)="openDlg(hd)">
+                    <mat-icon>shopping_cart</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+</div>
+
+<div class="containerWidth" fxLayout="row"  fxLayoutWrap fxLayoutGap="0.5%" fxLayout.xs="column" >
+    <mat-list fxFlex="80%" role="list" *ngFor="let v of listadoVentas; let i=index" > 
+        <mat-form-field>
+            <input matInput  placeholder="Sabor" [(ngModel)]="v.heladoDisponible.sabor.descripcion" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <input matInput type="number" placeholder="Cantidad" [(ngModel)]="v.cantidadVasosVendidos" readonly>
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <input matInput placeholder="Pago" value="SI" readonly [hidden]="!v.pago">
+            <input matInput placeholder="Pago" value="NO" readonly [hidden]="v.pago">
+        </mat-form-field>
+    
+        <span class="example-spacer"></span>
+        <button mat-fab color="warn" (click)="eliminar(i)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-list>
+
+    <div fxFlex="20%" fxLayout.xs="column">
+        <h1>TOTAL VENTA </h1>
+       <div class="texto">$ {{totalVenta}}</div>
+    </div>
+</div>
+
+<div class="containerWidth">
+<button  style="float: right;" mat-raised-button color="primary" (click)="guardar()" [disabled]= "estadoBtn()" routerLink="/">Registrar Venta</button>
+</div>
+
+   

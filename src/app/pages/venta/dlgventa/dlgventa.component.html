@@ -1,0 +1,36 @@
+<h1 mat-dialog-title [style.background]="venta.heladoDisponible.sabor.color">
+    Helado de {{venta.heladoDisponible.sabor.descripcion}}
+</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput placeholder="Cantidad Helados" [(ngModel)] ="venta.cantidadVasosVendidos" required maxlength="2" min="0" max="{{venta.heladoDisponible.cantidadVasosDispobibles}}">
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <span class="example-spacer"></span>
+    
+    <mat-slide-toggle [(ngModel)]="venta.pago">Pagó </mat-slide-toggle>
+    <span class="example-spacer"></span>
+    <div [hidden]="venta.pago">
+        <mat-form-field>
+            <input matInput placeholder="Nombres"  [(ngModel)] ="deudor.nombres" class="upperCase">
+        </mat-form-field>
+
+        
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <input matInput placeholder="Apellidos"  [(ngModel)] ="deudor.apellidos" class="upperCase">
+        </mat-form-field>
+        <span class="example-spacer"></span>
+        <mat-form-field>
+            <input matInput placeholder="Cantidad Helados Deuda" [(ngModel)] ="deudor.cantidadVasosDeuda" type="number" maxlength="2" min="0" max="{{venta.heladoDisponible.cantidadVasosDispobibles}}">
+        </mat-form-field>
+    </div>
+
+    <h4 style="color: red;" [hidden]="!verMensaje()"> La cantidad de helados deuda no puede ser mayor a la cantidad de vasos vendidos</h4>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-fab color="primary" [disabled]= "disableBtn()" [mat-dialog-close]="venta">
+        <mat-icon>playlist_add_check</mat-icon>
+    </button>
+</div>

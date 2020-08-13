@@ -1,0 +1,55 @@
+<mat-toolbar>
+    <span>Ingredientes</span>
+</mat-toolbar>
+
+<mat-list role="list" *ngFor="let d of ingredienteInversion; let i=index">
+    <mat-form-field>
+        <mat-select placeholder="Ingrediente" [(value)]="d.ingrediente.id" required [disabled]="disableDlg">
+            <mat-option *ngFor ="let i of ingredientes" [value]="i.id">{{i.descripcion}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cantidad" [(ngModel)]="d.cantidad" required [disabled]="disableDlg">
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <span matPrefix>$ &nbsp;</span>
+        <input matInput type="number" placeholder="Valor Total" [(ngModel)]="d.valorTotal" required [disabled]="disableDlg">
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" (click)="actualizarIngredinete(d)" [disabled]="disableBtnActualizarIngrediente(d)">Actualizar</button>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="warn" (click)="eliminarIngrediente(i)" [disabled]="disableDlg">Remover</button>
+</mat-list>
+
+<mat-toolbar>
+    <span>Helados Disponibles</span>
+</mat-toolbar>
+
+<mat-list role="list" *ngFor="let d of heladosDisponibles; let i=index">
+    <mat-form-field>
+        <mat-select placeholder="Sabor" [(value)]="d.sabor.id" required [disabled]="disableDlg">
+            <mat-option *ngFor ="let s of sabores" [value]="s.id">{{s.descripcion}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <span class="example-spacer"></span>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cantidad Vasos Preparados" [(ngModel)]="d.cantidadVasosPreparados" required [disabled]="disableDlg">
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <input matInput  type="number" placeholder="Cantidad Vasos Disponibles" [(ngModel)]="d.cantidadVasosDispobibles" required [disabled]="disableDlg">
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <mat-form-field>
+        <span matPrefix>$ &nbsp;</span>
+        <input matInput type="number" placeholder="Valor Vaso Unidad" [(ngModel)]="d.valorVasoUnidad" required [disabled]="disableDlg">
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" (click)="actualizarHeladoDisponible(d)" [disabled]="disableBtnActualizarHelDisp(d)">Actualizar</button>
+</mat-list> 
+
+<h3 style="color: red;" [hidden]="!disableDlg"> La inversión no se puede modificar, debido a que la venta se completo en su totalidad.</h3>
